@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dao" class="test04.quiz.JDBCDao" init-method="init" destroy-method="destroy">
+		<property name="dbserver" value="jdbc"/>
+	</bean>
+	<bean id="MyController" class="test04.quiz.MyController" scope="prototype">
+		<property name="dao" ref="dao"/>
+	</bean>
+</beans>

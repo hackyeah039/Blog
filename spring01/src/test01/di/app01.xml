@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="person" class="test01.di.Person">
+		<!-- 멤버변수에 해당하는 setter메소드 호출 -->
+		<property name="name" value="길동이"/>
+		<property name="age" value="10"/>
+	</bean>
+	<bean id="person1" class="test01.di.Person">
+		<!-- 생성자로 멤버변수값 초기화하기 -->
+		<constructor-arg type="java.lang.String" index="0" value="김자바"/><!-- 인덱스 생략시 차례대로들어감 -->
+		<!-- 타입으로 집어넣을수도있는데,만약 String 여러개면 어떤게 어떤건지몰라서 에러남 -->
+		<constructor-arg index="1" value="20"/>
+	</bean>
+</beans>

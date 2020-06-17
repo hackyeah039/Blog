@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+	<bean id="OracleDao" class="test03.di.OracleDao" >
+		<property name="dbserver" value="오라클입니다."></property>
+	</bean>
+	 -->
+	<bean id="dao" class="test03.di.MySqlDao">
+		<property name="dbserver" value="jdbc:mysql://@loacalhost:testdb"></property>
+	</bean>
+	<bean id="MyusersController" class="test03.di.MyUsersController">
+		<property name="dao" ref="dao"/>
+	</bean>
+</beans>

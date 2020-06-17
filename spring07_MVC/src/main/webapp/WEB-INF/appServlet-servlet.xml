@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Controller 등록 -->
+	<bean class="com.jhta.spring07.controller.FortuneController"/> <!-- 컨트롤러등록-매핑정보읽게 ,이름안주면 클래스로 읽음 -->
+	<bean class="com.jhta.spring07.controller.WeatherController"/>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="WEB-INF/" /><!-- 뷰이름 앞에 붙는다 /WEB-INF/showFortune -->
+		<property name="suffix" value=".jsp" /><!-- 뷰이름 뒤에 붙는다 showFortune.jsp -->
+	</bean>
+</beans>

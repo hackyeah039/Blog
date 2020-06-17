@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 알리아스,매퍼정보위치만 -->
+<typeAliases>
+	<typeAlias type="com.jhta.spring10.vo.BoardVo" alias="board"/>
+</typeAliases>
+  <mappers>
+    <mapper resource="com/jhta/mybatis/mapper/BoardMapper.xml"/>
+  </mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+

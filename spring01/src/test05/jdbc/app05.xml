@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+		JDBC연동과정 
+		1.DataSource설정
+		2.JdbcTemplate 설정(dataSource 객체주입)
+		3.DAO 설정(jdbcTemplate주입)
+	 -->
+	
+	<!-- 1.DataSource설정 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"> <!-- 커넥션풀연결 작업 끊음 메소드가  -->
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> <!-- 멤버변수가 driverClassName 그래서 세터로 설정 -->
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+	</bean>
+	<!-- 2.JdbcTemplate 설정(dataSource 객체주입) -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	 	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 3.DAO 설정(jdbcTemplate주입) -->
+	<bean id="dao" class="test05.jdbc.MembersDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- applicationContext.xml :웹기능과 관련없는 객체설정
+		DB연결 기능 객체들 ->Service,DAO,트랜잭션(관련처리),AOP ==웹과 관련없는 객체들
+		
+		 application이  appServlet보다 먼저 만들어짐 cause 컨트롤러는 DAO,service를 참고하니깐//
+		 
+		 ac는 공유자원역할을 한다. 전역객체같은것.얘들이 만들어지면 컨트롤러로 투입됨 
+	 -->
+     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="SCOTT"></property>
+		<property name="password" value="tiger"></property>
+	 </bean>
+	 <!-- sqlSessionFactoryBean (datasource,Mapper XML파일)-->
+	 <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	 	<property name="dataSource" ref="dataSource"/>
+	 	<property name="mapperLocations" value="classpath*:mybatis/MembersMapper.xml"/>
+	 </bean>
+	 <!-- sqlSessionTemplate (sqlSessionFactoryBean 주입 -> 생성자) -->
+	 <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	 	<constructor-arg index="0" ref="factory"/>
+	 </bean>
+	 <!-- DAO설정 -->
+	 <bean id="dao" class="test.dao.MembersDao">
+	 	<property name="session" ref="sessionTemplate"/>
+	 </bean>
+	 <!-- service설정 -->
+	 <bean id="service" class="test.service.MembersService">
+	 	<property name="dao" ref="dao"/>
+	 </bean>
+</beans>

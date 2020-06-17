@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 어노테이션으로 객체 자동생성하기
+		<context:component-scan.../>
+		==> @Component, @Repository, @Service, @Controller 어노테이션을 갖는 클래스타입의
+		객체가 자동생성됨
+		@Componenet -아래의 3가지 경우에 해당하지않는 클래스
+		@Repository -영속성에 관련된 객체(DAO)
+		@Service - Service클래스 역할(dao메소드의 트랜잭션처리기능등을 갖는 클래스)
+		@Controller - 컨트롤러 객체(웹브라우져로 요청과 응답에 관련된 기능을 갖는 객체)
+	 -->
+	
+	<!-- test01을 포함한 하위패키지의 bean객체들을 자동생성하기 -->
+	<context:component-scan base-package="test01"/>	
+</beans>
