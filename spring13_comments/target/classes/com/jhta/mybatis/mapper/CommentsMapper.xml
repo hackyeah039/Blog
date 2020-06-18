@@ -35,6 +35,9 @@
 	 <select id="getinfo" resultType="comments" parameterType="int">
 	 	select * from comments where num=#{num}
 	 </select>
+	 <select id="checkaddr" parameterType="String" resultType="members">
+	 	select * from members where m_addr like '%'||#{addr}||'%'
+	 </select>
 </mapper>
 
 

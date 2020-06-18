@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	<!-- 공통기능 -->
+	<bean id="advice" class="com.jhta.spring16.aop.LogAdvice"/>
+	<!-- 핵심기능 -->
+	<bean id="dao" class="com.jhta.spring16.dao.MembersDAOImpl"/>
+	
+	<aop:config><!-- dao..*(..) 첫번째 점  : 경로, 두번째 점 : 모든 클래스 , * :전체메소드 , (..) :모든파라미터 -->
+		<aop:aspect ref="advice">
+			<aop:pointcut expression="execution(public * com.jhta.spring16.dao..*(..))" id="aaaa"/>
+			<aop:around method="around" pointcut-ref="aaaa"/>
+		</aop:aspect>
+	</aop:config>	
+</beans>

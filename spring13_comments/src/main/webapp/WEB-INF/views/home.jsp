@@ -17,6 +17,7 @@
 <script type="text/javascript" src="/spring13/resources/js/jquery-3.5.1.js"></script>
 </head>
 <body>
+<h1><a href="/spring13/json/asd">리스트보러가기</a></h1>
 <h1>영화정보</h1>
 <div>
 	<h1>${title }</h1>

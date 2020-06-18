@@ -6,6 +6,7 @@
 <!-- 알리아스,매퍼정보위치만 -->
 <typeAliases>
 	<typeAlias type="com.jhta.spring13.VO.CommentsVo" alias="comments"/>
+	<typeAlias type="com.jhta.spring13.VO.MembersVo" alias="members"/>
 </typeAliases>
 
 <mappers>

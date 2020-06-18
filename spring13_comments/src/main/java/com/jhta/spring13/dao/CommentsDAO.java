@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.spring13.VO.CommentsVo;
+import com.jhta.spring13.VO.MembersVo;
 
 @Repository
 public class CommentsDAO {
@@ -32,5 +33,8 @@ public class CommentsDAO {
 	}
 	public CommentsVo getinfo(int num) {
 		return sqlsession.selectOne(NAMESPACE+".getinfo",num);
+	}
+	public List<MembersVo> checkaddr(String addr) {
+		return sqlsession.selectList(NAMESPACE+".checkaddr",addr);
 	}
 }

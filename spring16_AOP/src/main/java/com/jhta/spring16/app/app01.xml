@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- 핵심기능객체 -->
+	<bean id="membersDao" class="com.jhta.spring16.dao.MembersDAOImpl"/>
+	<!-- 공통기능객체(어드바이스) -->
+	<bean id="advice" class="com.jhta.spring16.aop.MyAdvice"/>
+	
+	<!-- aop설정하기(핵심기능객체+공통기능객체 결합하기==>위빙), aspect라고한다 -->
+	<!-- 이 두개를 결합하는걸  AOP라고한다. -->
+	
+	<aop:config><!--  어떤객체,어떤 기능넣을지 -->
+		<aop:aspect ref="advice"><!-- advice공통기능 ,pointcut은 지점 -->
+			<aop:pointcut expression="execution(public * com.jhta.spring16.dao..*(..))" 
+			 id="pointCut"/><!-- 퍼블릭 타입의 ,리턴타입,dao패키지안에 모든클래스의 모든 메소드, 모든 파라미터 -->
+			<aop:before method="test" pointcut-ref="pointCut"/><!-- 포인트컷의 지점의 이전에 메소드를 결합하겠다는거임 -->
+			<aop:after method="afterMethod" pointcut-ref="pointCut"/>
+		</aop:aspect> 
+	</aop:config>
+</beans>

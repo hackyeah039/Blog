@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.spring13.VO.CommentsVo;
+import com.jhta.spring13.VO.MembersVo;
 import com.jhta.spring13.dao.CommentsDAO;
 
 @Service
@@ -32,5 +33,8 @@ public class CommentsService {
 	}
 	public CommentsVo getinfo(int num) {
 		return dao.getinfo(num);
+	}
+	public List<MembersVo> checkaddr(String addr) {
+		return dao.checkaddr(addr);
 	}
 }
