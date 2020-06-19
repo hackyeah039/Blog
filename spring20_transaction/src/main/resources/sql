@@ -1,0 +1,9 @@
+drop table points_Seq;
+create table points
+(
+    pnum number(5) primary key,
+    num number(5) references members1(num),
+    point number(6),
+    regdate date
+);
+create sequence points_Seq;

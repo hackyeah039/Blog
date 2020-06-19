@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	 <!--  -->
+     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="SCOTT"></property>
+		<property name="password" value="tiger"></property>
+	 </bean>
+	 <!-- sqlSessionFactoryBean (datasource,Mapper XML파일)-->
+	 <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	 	<property name="dataSource" ref="dataSource"/>
+	 	<property name="mapperLocations" value="classpath*:mybatis/*"/>
+	 </bean>
+	 <!-- sqlSessionTemplate (sqlSessionFactoryBean 주입 -> 생성자) -->
+	 <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	 	<constructor-arg index="0" ref="factory"/>
+	 </bean>
+	 <!-- dao -->
+	 <bean id="memberdao" class="com.jhta.spring20.dao.MembersDao">
+	 	<property name="session" ref="sessionTemplate"></property>
+	 </bean>
+	 <bean id="pointdao" class="com.jhta.spring20.dao.PointsDao">
+	 	<property name="sqlSessionTemplate" ref="sessionTemplate"></property>
+	 </bean>
+	 <!-- service -->
+	 <bean id="service" class="com.jhta.spring20.service.MembersServiceImpl">
+	 	<property name="membersDao" ref="memberdao"/>
+	 	<property name="pointsDao" ref="pointdao"/>
+	 </bean>
+	 <!-- 트랜잭션 설정 -->
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource"/>
+	 </bean>
+	 
+	 <!--////////////// 트랜잭션 설정 ////////////////////////////-->
+	 <tx:advice id="advice" transaction-manager="transactionManager">
+	 	<!-- 트랜잭션 전파규칙 설장 --> <!-- 어떤메소드에 트랜지션 적용할건지  -->
+	 	<tx:attributes>
+	 		<!-- insert로 시작하는 모든 메소드에 트랜잭션 적용해라  -->
+	 		<tx:method name="insert" propagation="REQUIRED"/>
+	 	</tx:attributes>
+	 </tx:advice>	 
+	 <!-- advice를 어디에 적용할건지 -->
+	 <aop:config>
+	 	<aop:pointcut expression="execution(* com.jhta.spring20.service.*Service*.*(..))" id="pointcut"/><!-- 모든 service라는 이름을가진 클래스에 -->
+	 	<aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
+	 </aop:config>	
+	 <!--/////////////////////////////////////////////////////////////// -->
+	 	
+</beans>

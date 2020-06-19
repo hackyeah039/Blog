@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- app.xml -->
+	<!-- dao객체를 생성하고 aop가 적용될수 있도록 설정해 보세요. -->
+	<bean id="dao" class="test.dao.MembersDAOImpl"/>
+	<bean id="advice" class="test.advice.LogAdvice"/>
+	
+	<aop:config>
+		<aop:aspect ref="advice">
+			<aop:around method="log" pointcut-ref="aa"/>
+			<aop:pointcut expression="execution(public * test.dao..*(..))" id="aa"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
