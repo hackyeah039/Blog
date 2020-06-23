@@ -1,0 +1,21 @@
+@charset "UTF-8";
+#wrap{
+	width: 80%;
+	height: 1000px;
+	margin: auto;
+}
+#header{
+	width: 100%;
+	height: 20%;
+	background-color: aquamarine;
+}
+#content{
+	width: 100%;
+	height: 70%;
+	background-color: orange;
+}
+#footer{
+	width: 100%;
+	height: 10%;
+	background-color: yellow;
+}

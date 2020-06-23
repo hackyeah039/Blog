@@ -23,6 +23,7 @@
 		select NVL(count(*),0) cnt from board
 		<include refid="search"/>
 	</select>
+	<!-- 리스트 구하기 -->
 	<select id="list" parameterType="hashmap" resultType="board">
 		select * from
 		(
@@ -45,10 +46,14 @@
 	
 	<!-- 다음글 -->
 	<select id="next" parameterType="int" resultType="board">
-		select * from 
+<!-- 		select * from 
 		(
 		<![CDATA[select * from board where num>5 order by num asc]]> 
 		) where rownum=1
+ -->		 
+ 		select * from
+ 		<![CDATA[(select * from board where num>#{num} order by num asc)]]>
+ 		where rownum=1
 	</select>
 	
 	<!-- 이전글 -->

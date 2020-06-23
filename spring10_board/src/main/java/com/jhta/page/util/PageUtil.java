@@ -10,7 +10,7 @@ public class PageUtil {
 	private int rowBlockCount;//한페이지에 보여질 글의 갯수-받
 	private int pageBlockCount;//한페이지에 보여질 페이지의 갯수-받
 	private int totalRowCount;//전체 글의 갯수-받
-	public PageUtil() {}
+	public PageUtil() {};
 	public PageUtil(int pageNum,int totalRowCount ,int rowBlockCount, int pageBlockCount) {
 		this.pageNum = pageNum;
 //		System.out.println(pageNum+"pageNum");
@@ -88,9 +88,5 @@ public class PageUtil {
 	public void setTotalRowCount(int totalRowCount) {
 		this.totalRowCount = totalRowCount;
 	}
-	
-	
-	
-	
 	
 }
