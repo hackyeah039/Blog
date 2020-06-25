@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width="500">
+        <tr>
+        	<td>번호</td>
+            <td>이름</td>
+            <td>전화번호</td>
+            <td>주소</td>
+            <td>가입일</td>
+        </tr>
+        <%
+            for(var i=0;i<list.length;i++){
+                var mem=list[i];
+        
+        %>
+        <tr>
+            <td><%=mem.num%></td>
+            <td><%=mem.name%></td>
+            <td><%=mem.phone%></td>
+            <td><%=mem.addr%></td>
+            <td><%=mem.regdate%></td>
+            <td><a href="/delete?num=<%=mem.num%>">삭제</a></td>
+            <td><a href="/update?num=<%=mem.num%>">수정</a></td>
+        </tr>
+        <%
+            }
+        %>
+     </table>
+</body>
+</html>

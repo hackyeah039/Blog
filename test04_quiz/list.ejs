@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>전체 목록</h1>
+    <table>
+        <tr>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>이메일</th>
+        </tr>
+        <%
+            for(var i=0;i<list.length;i++){
+                var mem=list[i];
+        
+        %>
+        <tr>
+            <td><%=mem.id%></td>
+            <td><%=mem.pwd%></td>
+            <td><%=mem.email%></td>
+            <td><a href="/delete?id=<%=mem.id%>">삭제</a></td>
+            <td><a href="/update?id=<%=mem.id%>">수정</a></td>
+        </tr>
+        <%
+            }
+        %>
+    </table>
+</body>
+</html>

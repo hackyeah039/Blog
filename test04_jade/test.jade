@@ -1,0 +1,18 @@
+html
+	head
+		title test.jade
+		meta(charset='utf-8')
+	body
+		h1 hello World!
+		p 반가워요
+		a(href='http://www.daum.net') daum
+		p 아이디 #{id}
+		p 비밀번호 #{pwd}
+		h1 회원가입
+		form(method='post',action='/join')
+			p ID
+			input(type='text',name='id')
+			p PASSWORD
+			input(type='password',name='pwd')
+			p
+				button(type='submit') 가입
