@@ -1,0 +1,28 @@
+extends layout
+block content
+  h1 회원목록
+  table(border='1',width='500')
+    tr
+      th 아이디
+      th 비밀번호
+      th 이메일
+      th 삭제
+      th 수정
+    each user in list
+      tr
+        td #{user.id}
+        td #{user.pwd}
+        td #{user.email}
+        td 
+          a(href='/users/delete?id=#{user.id}') 삭제
+        td
+          a(href='/users/update?id=#{user.id}') 수정
+    a(href='/') 메인페이지
+    
+    
+    
+    
+    
+    
+    
+    

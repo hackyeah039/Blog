@@ -1,0 +1,15 @@
+extends layout
+block content
+  h1 회원가입
+  form(method='post',action='/users/joinOk')
+    p 아이디
+    p
+      input(type='text',name='id')
+    p 비밀번호
+    p
+      input(type='password',name='pwd')
+    p 이메일
+    p
+      input(type='text',name='email')
+    p
+      input(type='submit',value='가입')    

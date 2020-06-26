@@ -1,0 +1,16 @@
+extends layout
+block content
+  h1 회원가입
+  form(method='post',action='/joinOk')
+    p 이름
+    p
+      input(type='text',name='name')
+    p 전화번호
+    p
+      input(type='text',name='phone')
+    p 주소
+    p
+      input(type='text',name='addr')
+    p
+      input(type='submit',value='가입') 
+	
