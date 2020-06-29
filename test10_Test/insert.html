@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>회원가입창</title>
+</head>
+<body>
+	<form method="POST" action="/insertOk">
+		<input type="text" placeholder="id" name="id"> <input type="button" onclick="check()" value="idcheck"><br> 
+		<input type="password" placeholder="pwd" name="pwd"><br>
+		<input type="text" placeholder="email" name="email"><br>
+		<input type="text" placeholder="phone" name="phone"><br>
+		<input type="submit" placeholder="insert">
+	</form>
+</body>
+<script>
+	function check(){
+		var id=document.getElementsByName("id").value;
+		console.log(id);
+		location.href="/check";
+		console.log(id);
+	}
+</script>
+</html>

@@ -1,0 +1,13 @@
+extends layout
+block content
+  h1 Chatting Room
+  p #{nickname}님 반갑습니다
+  form(method='post',action='/makeroom')
+    label 방제
+    input(type='text',name='roomname')
+    br
+    input(type='submit',value='방만들기')
+  ul
+  each room in roomlist
+    li #{room}
+      a(href='/join?room=#{room}') 입장하기

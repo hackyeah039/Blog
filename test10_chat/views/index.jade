@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(method='post',action='/enter')
+    label 닉네임
+    input(type='text',name='nickname')
+    br
+    input(type='submit',value='입장')
+    

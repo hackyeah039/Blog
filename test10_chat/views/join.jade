@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+  script(src='/js/jquery-3.5.1.js')
+  script(src='/socket.io/socket.io.js')
+  script.
+    $(document).ready(function(){
+    	var socket=io.connect();
+    	socket.on('connect',function(){
+    		console.log('서버접속성공!join');
+    		socket.emit('join',{roomname:$("#roomname").text(),nickname:$("#nickname").text()});
+    	});
+    	socket.on('join',function(data){
+    		var nickname=data.nickname;
+    		///ul에 접속자 명단 추가
+    		$('ul').append("<li id='"+nickname+"'>"+nickname+"</li>");
+    		$('#chatWin').append('<p>'+nickname+'님이 입장하셨습니다.</p>');
+    	})
+    	$("#sendBtn").click(function(){
+    		socket.on('connect',function(){
+			socket.emit('send',{msg:$("#msg").text()});
+    		})
+    		socket.on('send',function(){
+    			var msg=data.msg;
+    			$('#chatWin').append('<p>'+msg+'</p>');
+    		})
+    	})
+    });
+  body
+    h1 #{roomname} 방에 입장!
+    h2 
+      span(id='roomname') #{roomname}
+    h2 접속자 명단
+    ul
+      each att in attendants
+        li(id='#{att}') #{att}
+    div(id='chatWin',style='width:300px;height:300px;border:2px solid gray;overflow:scroll')
+    span(id='nickname') #{nickname}
+    input(type='text',id='msg')
+    input(type='button',value='보내기',id='sendBtn')
+  
