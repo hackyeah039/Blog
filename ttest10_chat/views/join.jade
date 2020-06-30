@@ -1,0 +1,73 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+  script(src='/js/jquery-3.5.1.js')
+  script(src='/socket.io/socket.io.js')
+  script.
+    $(document).ready(function(){
+    	var socket=io.connect();
+    	socket.on('connect',function(){
+    		//console.log('서버접속성공!');
+    		socket.emit('join',
+    		 {roomname:$("#roomname").text(),nickname:$("#nickname").text()});
+    	});
+    	socket.on('join',function(data){
+    		var nickname=data.nickname;
+    		//ul에 접속자 명단 추가
+    		$('ul').append("<li id='"+ nickname +"'>" + nickname +"</li>");
+    		$('#chatWin').append('<p>'+ nickname +'님이 입장하셨습니다</p>');		
+    	});
+    	//메시지 보내기 버튼
+    	$("#sendBtn").click(function(){
+    		var roomname=$("#roomname").text();
+    		var nickname=$("#nickname").text();
+    		var msg=$("#msg").val();
+    		socket.emit('sendMsg',
+    		  {roomname:roomname,nickname:nickname,msg:msg});
+    		  
+    	});
+    	//다른 클라이언트가 채팅메시지를 보낸 경우
+    	socket.on('recMsg',function(data){
+    		var nickname=data.nickname;
+    		var msg=data.msg;
+    		$("#chatWin").append("<p>"+ nickname +":"+ msg +"</p>");
+    	});
+    	$("#btn2").click(function(){
+    		var roomname=$("#roomname").text();
+    		var nickname=$("#nickname").text();
+    		socket.emit('leaveRoom',{roomname:roomname,nickname:nickname});
+    		location.href='/enter';
+    	});
+    	socket.on('leaveRoom',function(data){
+    		$("#chatWin").append("<p>"+ data.nickname +"님이 퇴장하셨습니다.</p>");
+    		//접속자 명단에서 퇴장한사람의 닉네임삭제하기(ul li 삭제)
+    		$("#"+ data.nickname).remove();
+    	});
+    });
+  body
+    h1 #{roomname} 방에 입장!
+    h2
+      span(id='roomname') #{roomname}
+    input(type='button',value='나가기' id='btn2')
+    h2 접속자 명단
+    ul
+      each att in attendants
+        li(id='#{att}') #{att}
+    div(id='chatWin',style='width:300px;height:300px;border:2px solid gray;overflow:scroll')
+    span(id='nickname') #{nickname}
+    input(type='text',id='msg')
+    input(type='button',value='보내기',id='sendBtn')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
